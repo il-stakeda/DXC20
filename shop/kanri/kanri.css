@@ -1,0 +1,33 @@
+body {
+  background-color:#bbb;
+  font-size: 14px;
+}
+p,form {
+  margin: 0;
+  padding: 4px 0;
+}
+table {
+  width: 500px; 
+  margin: 15px auto;
+  padding: 0;
+  background-color: #fff;
+  border-collapse: collapse;
+}
+th, td {
+  margin: 0;
+  padding: 4px;
+  border: 1px solid #bbb;
+}
+.goods {
+  font-weight: bold;
+}
+.base {
+  width: 480px; 
+  margin: 15px auto;
+  padding: 10px;
+  background-color: #eee;
+}
+.error {
+  font-weight: bold;
+  color: #c44;
+}
