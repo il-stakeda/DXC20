@@ -11,22 +11,25 @@
     if (preg_match('/[^\d-]/', $tel)) $error .= '電話番号が正しくありません。<br>';
     if (!$error) {
       $pdo = connect();
-      $body = "商品が購入されました。\n\n"
-       . "お名前: $name\n"
-       . "ご住所: $address\n"
-       . "電話番号: $tel\n\n";
-      foreach($_SESSION['cart'] as $code => $num) {
-        $st = $pdo->prepare("SELECT * FROM goods WHERE code=?");
-        $st->execute(array($code));
-        $row = $st->fetch();
-        $st->closeCursor();
-        $body .= "商品名: {$row['name']}\n"
-          . "単価: {$row['price']} 円\n"
-          . "数量: $num\n\n";
-      }
- //     $from = "newuser@localhost";
- //     $to = "newuser@localhost";
- //     mb_send_mail($to, "購入メール", $body, "From: $from");
+        // 1. 購入者情報を `orders` テーブルに挿入
+        $st = $pdo->prepare("INSERT INTO orders (name, address, tel) VALUES (?, ?, ?)");
+        $st->execute([$name, $address, $tel]);
+        $order_id = $pdo->lastInsertId();  // 新規注文のIDを取得
+
+        // 2. 購入した商品情報を `order_items` テーブルに挿入
+        foreach ($_SESSION['cart'] as $code => $num) {
+            $st = $pdo->prepare("SELECT * FROM goods WHERE code = ?");
+            $st->execute([$code]);
+            $row = $st->fetch();
+
+            $product_name = $row['name'];
+            $price = $row['price'];
+            $total_price = $price * $num;
+
+            // 商品情報を `order_items` テーブルに挿入
+            $st = $pdo->prepare("INSERT INTO order_items (order_id, product_code, product_name, quantity, price, total_price) VALUES (?, ?, ?, ?, ?, ?)");
+            $st->execute([$order_id, $code, $product_name, $num, $price, $total_price]);
+        }
       $_SESSION['cart'] = null;
       require 't_buy_complete.php';
       exit();
