@@ -4,7 +4,7 @@
 
 $user = "admin";
 $password = "PasswordMySQL";
-$dns="database-takedasaori.ch18xqw1pgc8.ap-northeast-1.rds.amazonaws.com";
+$dns="database-takedasaori.#######.ap-northeast-1.rds.amazonaws.com";
 
     return new PDO("mysql:host=$dns; dbname=shop; charset=utf8", "$user", "$password");
   }
