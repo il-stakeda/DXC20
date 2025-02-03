@@ -2,7 +2,7 @@
 // db_config.php
 
 // MySQL接続設定
-$servername = "your-rds-endpoint";  // RDSのエンドポイント
+$servername = "AAA";  // RDSのエンドポイント
 $username = "admin";        // MySQLのユーザー名
 $password = "PasswordMySQL";        // MySQLのパスワード
 $dbname = "beer_shop";              // 使用するデータベース名
