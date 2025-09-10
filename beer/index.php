@@ -8,6 +8,12 @@ require_once 'db_config.php';
 $pdo = getDBConnection();
 $stmt = $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// ★ 追加: AZをメタデータから取得
+$az = @file_get_contents("http://169.254.169.254/latest/meta-data/placement/availability-zone");
+if ($az === false) {
+    $az = "取得できませんでした";
+}
 ?>
 
 <!DOCTYPE html>
@@ -95,5 +101,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <button type="submit" class="submit-btn">購入確定</button>
     </form>
-</body>
+        <div style="text-align:center; margin-top:20px; color:#555;">
+        実行アベイラビリティゾーン: <?= htmlspecialchars($az, ENT_QUOTES, 'UTF-8'); ?>
+    </div>
+ </body>
 </html>
