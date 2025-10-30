@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ . '/db_config.php';
-try {
-  $pdo = getDBConnection();
-  $ok  = $pdo->query("SHOW TABLES FROM insurance_portal")->fetchAll();
-  echo "***成功*** テーブル数: " . count($ok);
-} catch (Throwable $e) {
-  echo "***失敗***: " . htmlspecialchars($e->getMessage());
-}
+echo "Database connection : ";
+$endpoint = "AAA";
+$user = "admin";
+$pass = "PasswordMySQL";
+$db = "insurance_portal";
+$link = mysqli_connect($endpoint,$user,$pass,$db)
+or die("**ERROR** " . mysqli_connect_error() . "\n");
+echo "SUCCESS\n";
 ?>
