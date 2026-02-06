@@ -1,5 +1,5 @@
 <?php
-$servername = "database-<yourname>-ins-1.xxxxxx.ap-northeast-1.rds.amazonaws.com";
+$servername = "AAA";
 $username   = "admin";
 $password   = "PasswordMySQL";
 $dbname     = "insurance_portal";
