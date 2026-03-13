@@ -4,7 +4,7 @@ echo "Database connection with SSL : ";
 $endpoint = "AAA";
 $user = "admin";
 $pass = "PasswordMySQL";
-$db = "insurance_portal";
+$db = "mysql";
 
 // 1. mysqliの初期化
 $link = mysqli_init();
